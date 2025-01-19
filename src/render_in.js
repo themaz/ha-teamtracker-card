@@ -57,8 +57,8 @@ export function renderIn(c) {
             </div>
             <div class="outs" style=${styleMap({"--outs-display": `${c.outsDisplay}`})}>${c.in0}</div>
             <div class="in-series-info" style=${styleMap({"--series-summary-display": `${c.seriesSummaryDisplay}`})}>${c.seriesSummary}</div>
-            <div class="line"></div>
-            <a class="bottom-clickable ${!c.bottomURL ? 'disabled' : ''}" href="${c.bottomURL ? c.bottomURL : '#'}" target="_blank">
+            <div class="line bottom-line" style=${styleMap({"--bottom-line-display": `${c.venueDisplay}`})}></div>
+            <a class="bottom-clickable ${!c.bottomURL ? 'disabled' : ''}" href="${c.bottomURL ? c.bottomURL : '#'}" target="_blank" style=${styleMap({"--bottom-display": `${c.venueDisplay}`})}>
                 <div class="in-row1">
                     <div class="venue">${c.venue}</div>
                     <div class="down-distance">${c.in1}</div>

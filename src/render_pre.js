@@ -37,8 +37,8 @@ export function renderPre(c) {
                 </div>
             </div>
             <div class="pre-series-info" style=${styleMap({"--series-summary-display": `${c.seriesSummaryDisplay}`})}>${c.seriesSummary}</div>
-            <div class="line"></div>
-            <a class="bottom-clickable ${!c.bottomURL ? 'disabled' : ''}" href="${c.bottomURL ? c.bottomURL : '#'}" target="_blank">
+            <div class="line bottom-line" style=${styleMap({"--bottom-line-display": `${c.venueDisplay}`})}></div>
+            <a class="bottom-clickable ${!c.bottomURL ? 'disabled' : ''}" href="${c.bottomURL ? c.bottomURL : '#'}" target="_blank" style=${styleMap({"--bottom-display": `${c.venueDisplay}`})}>
                 <div class="pre-row1">
                     <div class="date">${c.startTerm} ${c.startTime}</div>
                     <div class="odds">${c.pre1}</div>

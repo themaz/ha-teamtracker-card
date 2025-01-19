@@ -7,7 +7,7 @@ let $4fcaa3c95ba349ea$export$607dc1951b62972e = "https://cdn-icons-png.freepik.c
 
 
 //
-//  Define and register the UI Card Editor 
+//  Define and register the UI Card Editor
 //
 /**
  * @license
@@ -775,7 +775,9 @@ class $de5768471e29ae80$export$c622f67f045f310d extends (0, $ab210b2da7b39b9d$ex
                     @closed=${(ev)=>ev.stopPropagation()}
                     >
                     ${this.entities.map((entity)=>{
-            return (0, $f58f44579a4747ac$export$c0bb0b647f701bb5)`<ha-list-item .value=${entity}>${entity}</ha-list-item>`;
+            return (0, $f58f44579a4747ac$export$c0bb0b647f701bb5)`<ha-list-item .value=${entity}
+                        >${entity}</ha-list-item
+                      >`;
         })}
                 </ha-select>
             </div>
@@ -821,6 +823,16 @@ class $de5768471e29ae80$export$c622f67f045f310d extends (0, $ab210b2da7b39b9d$ex
                 </ha-switch>
                 <label class="switch-label">
                     Show Timeouts
+                </label>
+            </div>
+            <div class="switch-container">    
+                <ha-switch
+                    @change="${(e)=>this._valueChanged(e, "show_venue")}"
+                    .checked="${this._config.show_venue !== false}"
+                    >
+                </ha-switch>
+                <label class="switch-label">
+                    Show Venue / TV Info
                 </label>
             </div>
             <div class="switch-container">    
@@ -3072,8 +3084,12 @@ function $654f96c20a3bcd40$export$3f4c9efb42c5bfd8(c) {
             <div class="in-series-info" style=${(0, $19f464fcda7d2482$export$1e5b4ce2fa884e6a)({
         "--series-summary-display": `${c.seriesSummaryDisplay}`
     })}>${c.seriesSummary}</div>
-            <div class="line"></div>
-            <a class="bottom-clickable ${!c.bottomURL ? "disabled" : ""}" href="${c.bottomURL ? c.bottomURL : "#"}" target="_blank">
+            <div class="line bottom-line" style=${(0, $19f464fcda7d2482$export$1e5b4ce2fa884e6a)({
+        "--bottom-line-display": `${c.venueDisplay}`
+    })}></div>
+            <a class="bottom-clickable ${!c.bottomURL ? "disabled" : ""}" href="${c.bottomURL ? c.bottomURL : "#"}" target="_blank" style=${(0, $19f464fcda7d2482$export$1e5b4ce2fa884e6a)({
+        "--bottom-display": `${c.venueDisplay}`
+    })}>
                 <div class="in-row1">
                     <div class="venue">${c.venue}</div>
                     <div class="down-distance">${c.in1}</div>
@@ -3261,8 +3277,12 @@ function $32e2f72be859b718$export$d6bad15bd473a528(c) {
             <div class="pre-series-info" style=${(0, $19f464fcda7d2482$export$1e5b4ce2fa884e6a)({
         "--series-summary-display": `${c.seriesSummaryDisplay}`
     })}>${c.seriesSummary}</div>
-            <div class="line"></div>
-            <a class="bottom-clickable ${!c.bottomURL ? "disabled" : ""}" href="${c.bottomURL ? c.bottomURL : "#"}" target="_blank">
+            <div class="line bottom-line" style=${(0, $19f464fcda7d2482$export$1e5b4ce2fa884e6a)({
+        "--bottom-line-display": `${c.venueDisplay}`
+    })}></div>
+            <a class="bottom-clickable ${!c.bottomURL ? "disabled" : ""}" href="${c.bottomURL ? c.bottomURL : "#"}" target="_blank" style=${(0, $19f464fcda7d2482$export$1e5b4ce2fa884e6a)({
+        "--bottom-display": `${c.venueDisplay}`
+    })}>
                 <div class="pre-row1">
                     <div class="date">${c.startTerm} ${c.startTime}</div>
                     <div class="odds">${c.pre1}</div>
@@ -3323,11 +3343,13 @@ function $84bc952fd23869d6$export$2e2366488d12e20d(t, lang, stateObj, c, o, spor
     c.basesDisplay = "none";
     c.barDisplay = "inherit";
     c.timeoutsDisplay = "inline";
+    c.venueDisplay = "inline";
     c.rankDisplay = "inline";
     c.seriesSummaryDisplay = "none";
     if (o.bottomURL == "more-info") c.bottomURL = null;
     else c.bottomURL = o.bottomURL || stateObj.attributes.event_url;
     if (o.show_timeouts == false) c.timeoutsDisplay = "none";
+    if (o.show_venue == false) c.venueDisplay = "none";
     if (o.show_rank == false) c.rankDisplay = "none";
     c.onFirstOp = 0.2;
     c.onSecondOp = 0.2;
@@ -3374,8 +3396,8 @@ function $84bc952fd23869d6$export$2e2366488d12e20d(t, lang, stateObj, c, o, spor
     if (c.logoBG[oppo] && o.darkMode) c.logoBG[oppo] = c.logoBG[oppo].replace("/500/", "/500-dark/");
     c.score[team] = stateObj.attributes.team_score;
     c.score[oppo] = stateObj.attributes.opponent_score;
-    c.scoreOp[1] = .6;
-    c.scoreOp[2] = .6;
+    c.scoreOp[1] = 0.6;
+    c.scoreOp[2] = 0.6;
     if (c.winner[team]) c.scoreOp[team] = 1;
     if (c.winner[oppo]) c.scoreOp[oppo] = 1;
     if (stateObj.attributes.team_homeaway == "home") {
@@ -3712,7 +3734,8 @@ const $1a7c5d625ead7579$export$c579ff79a032fc68 = (0, $def2de46b9306e8a$export$d
 .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
 .left-clickable { text-decoration: none; color: inherit; }
 .right-clickable { text-decoration: none; color: inherit; }
-.bottom-clickable { text-decoration: none; color: inherit; }
+.bottom-line { display: var(--bottom-line-display, none); }
+.bottom-clickable { text-decoration: none; color: inherit; display: var(--bottom-display, inline); }
 .disabled { pointer-events: none; cursor: default; }
 
 .possession { opacity: var(--possession-opacity, 1); font-size: 2.5em; text-align: center; font-weight:900; }
@@ -3772,8 +3795,8 @@ class $a510245ba2c1e365$export$c12aa10d47d2f051 extends (0, $ab210b2da7b39b9d$ex
     }
     static get styles() {
         return (0, $def2de46b9306e8a$export$dbf350e5966cf602)`
-            ${0, $1a7c5d625ead7579$export$c579ff79a032fc68}
-        `;
+      ${0, $1a7c5d625ead7579$export$c579ff79a032fc68}
+    `;
     }
     setConfig(config) {
         this._config = config;
@@ -3826,13 +3849,15 @@ class $a510245ba2c1e365$export$c12aa10d47d2f051 extends (0, $ab210b2da7b39b9d$ex
         o.opponentURL = this._config.opponent_url;
         o.bottomURL = this._config.bottom_url;
         o.show_timeouts = true;
+        o.show_venue = true;
         if (this._config.show_timeouts == false) o.show_timeouts = false;
+        if (this._config.show_venue == false) o.show_venue = false;
         o.show_rank = true;
         if (this._config.show_rank == false) o.show_rank = false;
         o.debug = this._config.debug;
         o.darkMode = this.hass.themes.darkMode;
         //
-        //  Set sport, team, and oppo 
+        //  Set sport, team, and oppo
         //
         var team = 1;
         var oppo = 2;

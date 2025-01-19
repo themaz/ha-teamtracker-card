@@ -13,7 +13,8 @@ export const cardStyles = css`
 .line { height: 1px; background-color: var(--primary-text-color); margin:10px 0; }
 .left-clickable { text-decoration: none; color: inherit; }
 .right-clickable { text-decoration: none; color: inherit; }
-.bottom-clickable { text-decoration: none; color: inherit; }
+.bottom-line { display: var(--bottom-line-display, none); }
+.bottom-clickable { text-decoration: none; color: inherit; display: var(--bottom-display, inline); }
 .disabled { pointer-events: none; cursor: default; }
 
 .possession { opacity: var(--possession-opacity, 1); font-size: 2.5em; text-align: center; font-weight:900; }
